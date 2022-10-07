@@ -1,0 +1,116 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Node_t {
+    int flag;
+    struct Node_t *child[26];
+};
+
+typedef struct Node_t Node;
+
+Node* createNode() {
+    Node *node = (Node*)malloc(sizeof( Node));
+    if(node) {
+        node->flag = 0;
+        for(int i = 0; i <26; i++) {
+            node->child[i] = NULL;
+        }
+    }
+    
+    return node;
+}
+
+void dfs(Node *temp, char *s) {
+   // printf("\n in for %s", s);
+    char prefix[100] = {0};
+    for(int i = 0; i < 26; i++) {
+        if(temp->child[i] != NULL) {
+            //printf("here");
+            char c = i + 'a';
+            printf("\n c is %c", c);
+            strcat(prefix, s);
+            strcat(prefix, &c);
+            printf("\n prefix is %s and len is %d", prefix, strlen(prefix));
+            dfs(temp->child[i], prefix);
+        }else {
+           // printf("\t NULL");
+        }
+    }
+    
+    printf("\n %s", s);
+}
+
+void suggestKeys(Node *root, char *s) {
+    
+    Node *temp = root;
+    for(int i = 0; i < strlen(s); i++) {
+        if(temp->child[s[i]-'a'] == NULL) {
+            printf("\n key not found");
+            return;
+        }
+     //   printf("\n in for %c", s[i]);
+        temp = temp->child[s[i]-'a'];
+    }
+    
+    if(temp->flag == 1) {
+        printf("\n %s found", s);
+    }
+    
+    dfs(temp, s);
+}
+
+int searchKey(Node *root, char *s) {
+    Node *temp = root;
+    for(int i = 0; i < strlen(s); i++) {
+        printf("\n in for %c", s[i]);
+        if(temp->child[s[i]-'a'] == NULL)
+            return 0;
+        else{
+            temp = temp->child[s[i]-'a'];
+        }
+    }
+    
+    if(temp->flag == 1)
+        return 1;
+    return 0;
+}
+
+void insertKey(Node *root, char *s) {
+    Node *temp = root;
+    for(int i = 0; i < strlen(s); i++) {
+        if(temp->child[s[i]-'a'] == NULL) {
+            temp->child[s[i]-'a'] = createNode();
+            temp = temp->child[s[i]-'a'];
+        }else{
+            temp = temp->child[s[i]-'a'];
+        }
+    }
+    
+    temp->flag = 1;
+    printf("\n inserted %s", s);
+}
+
+int main() {
+    // Write C code here
+    printf("Hello world");
+    char name[][100] = {"the", "a", "there", "answer", "any",
+                     "by", "bye", "their"};
+    
+    int n = sizeof(name)/sizeof(name[0]);
+    Node *root = createNode();
+    for(int i = 0; i <n; i++){
+        insertKey(root, name[i]);
+    }
+    char search[] = "their";
+    int res = searchKey(root, search);
+    if(res == 1) {
+        printf("\n found: %s", search);
+    }else{
+        printf("\n not found: %s", search);
+    }
+    
+    suggestKeys(root, "the");
+    return 0;
+}
