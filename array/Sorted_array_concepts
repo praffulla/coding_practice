@@ -4,6 +4,19 @@ Concept: The concept behind roatetd and sroted array question is simple and that
          one element x which is greater than (x+1)%n. Or if array is sorted then that count is 0. So if there are more than 1 elements 
          which satisfy this property(arr[x] > arr[(x+1)%n]), then that is for sure not sorted-rotated array.
          
- Q: Remove duplicates from Sorted array (leetcode: 26)
+ Q: Remove duplicates from Sorted array (Leetcode: 26)
+ 
+ Q:  Rotate Array (Leetcode: 189)
+ 
+ Concept: Very great concept here!, If you have subparts which you want to arrange in reverse order, what you will do ?
+          For example, P1 | P2 | P3 | P4  ---->  P4 | P3 | P2 | P1
+          
+          example: (1,2,3,4,5,6,7) here P1: {1,2} and P2: {3,4,5,6,7}
+          
+          Solution: Reverse P1 and Reverse P2. Now reverse entire array.
+          
+          This concept is useful in questions like -> reverse strings ("I.love.my.India") -> (India.my.love.I).
+          
+          So when you see problems where you figure out that you need to to reverse the order of parts of array, apply this concept.
  
     
