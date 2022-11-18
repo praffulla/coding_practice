@@ -1,0 +1,5 @@
+Q: Check if Array Is Sorted and Rotated. Leetcode : 1752
+
+Concept: The concept behind roatetd and sroted array question is simple and that is if sorted array is rotated then there must be only
+         one element x which is greater than (x+1)%n. Or if array is sorted then that count is 0. So if there are more than 1 elements 
+         which satisfy this property(arr[x] > arr[(x+1)%n]), then that is for sure not sorted-rotated array.
